@@ -13,7 +13,7 @@ class Customer(models.Model):
     pre_approved_at = models.DateTimeField()
 
     def __str__(self):
-        return f"{self.name} {self.surname}"
+        return f"{self.id} - {self.external_id}"
 
     class Meta:
         db_table = "customers"
