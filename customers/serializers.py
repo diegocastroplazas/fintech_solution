@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
 from .models import Customer
-from .data import COSTUMER_STATUS_CHOICES
+from .data import CUSTOMER_STATUS_CHOICES
 
 
 class CustomerSerializer(serializers.ModelSerializer):
     """Customer serializer"""
 
-    status = serializers.ChoiceField(choices=COSTUMER_STATUS_CHOICES, default=1)
+    status = serializers.ChoiceField(choices=CUSTOMER_STATUS_CHOICES, default=1)
 
     class Meta:
         model = Customer
@@ -21,3 +21,12 @@ class CustomerSerializer(serializers.ModelSerializer):
             "status",
         )
         read_only_fields = ("id", "created_at", "updated_at")
+
+
+class CustomerBalanceSerializer(serializers.ModelSerializer):
+    """Customer balance serializer"""
+
+    class Meta:
+        model = Customer
+        fields = ("external_id", "score", "total_debt", "available_amount")
+        read_only_fields = ("external_id", "score", "total_debt", "available_amount")

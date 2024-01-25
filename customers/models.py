@@ -1,5 +1,6 @@
 from django.db import models
 from loans.data import STATUS_CHOICES
+from django.db.models import Sum
 
 
 class Customer(models.Model):
@@ -12,6 +13,16 @@ class Customer(models.Model):
     status = models.SmallIntegerField(choices=STATUS_CHOICES)
     score = models.DecimalField(max_digits=12, decimal_places=2)
     pre_approved_at = models.DateTimeField()
+
+    @property
+    def total_debt(self) -> dict:
+        return self.loan_set.filter(status__in=[1, 2]).aggregate(
+            Sum("outstanding_amount", default=0)
+        )["outstanding_amount__sum"]
+
+    @property
+    def available_amount(self):
+        return self.score - self.total_debt
 
     def __str__(self):
         return f"{self.id} - {self.external_id}"
