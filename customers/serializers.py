@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from .models import Customer
 from .data import CUSTOMER_STATUS_CHOICES
+from .models import Customer
 
 
 class CustomerSerializer(serializers.ModelSerializer):

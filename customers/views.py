@@ -1,10 +1,10 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-
-from .serializers import CustomerSerializer, CustomerBalanceSerializer
-from .models import Customer
 from django.http import Http404
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .models import Customer
+from .serializers import CustomerBalanceSerializer, CustomerSerializer
 
 
 class CustomersView(APIView):

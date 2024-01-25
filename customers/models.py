@@ -1,6 +1,7 @@
 from django.db import models
-from loans.data import STATUS_CHOICES
 from django.db.models import Sum
+
+from loans.data import STATUS_CHOICES
 
 
 class Customer(models.Model):

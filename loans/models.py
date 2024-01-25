@@ -1,4 +1,5 @@
 from django.db import models
+
 from loans.data import STATUS_CHOICES
 
 
