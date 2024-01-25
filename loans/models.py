@@ -19,7 +19,7 @@ class Loan(models.Model):
     customer = models.ForeignKey("customers.Customer", on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.name
+        return f"Loan: {self.id} - {self.external_id}"
 
     class Meta:
         db_table = "loans"
