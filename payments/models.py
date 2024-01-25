@@ -1,4 +1,5 @@
 from django.db import models
+from .data import PAYMENT_STATUS_CHOICES
 
 
 class Payment(models.Model):
@@ -9,7 +10,7 @@ class Payment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     external_id = models.CharField(max_length=60, unique=True)
     total_amount = models.DecimalField(max_digits=20, decimal_places=10)
-    status = models.SmallIntegerField()
+    status = models.SmallIntegerField(choices=PAYMENT_STATUS_CHOICES)
     paid_at = models.DateTimeField()
     customer = models.ForeignKey("customers.Customer", on_delete=models.PROTECT)
 

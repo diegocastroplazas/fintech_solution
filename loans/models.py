@@ -1,4 +1,5 @@
 from django.db import models
+from loans.data import STATUS_CHOICES
 
 
 class Loan(models.Model):
@@ -7,7 +8,7 @@ class Loan(models.Model):
     id = models.AutoField(primary_key=True)
     external_id = models.CharField(max_length=60, unique=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2)
-    status = models.SmallIntegerField()
+    status = models.SmallIntegerField(choices=STATUS_CHOICES, default=1)
     contract_version = models.CharField(max_length=30)
     maximum_payment_date = models.DateTimeField()
     taken_at = models.DateTimeField()
