@@ -1,4 +1,5 @@
 from django.db import models
+
 from .data import PAYMENT_STATUS_CHOICES
 
 
