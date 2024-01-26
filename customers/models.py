@@ -1,17 +1,19 @@
 from django.db import models
 from django.db.models import Sum
 
-from loans.data import STATUS_CHOICES
-
 
 class Customer(models.Model):
     """Customer model"""
+
+    class Status(models.IntegerChoices):
+        ACTIVE = 1, "Active"
+        INACTIVE = 2, "Inactive"
 
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     external_id = models.CharField(max_length=60, unique=True)
-    status = models.SmallIntegerField(choices=STATUS_CHOICES)
+    status = models.SmallIntegerField(choices=Status.choices, default=Status.ACTIVE)
     score = models.DecimalField(max_digits=12, decimal_places=2)
     pre_approved_at = models.DateTimeField()
 

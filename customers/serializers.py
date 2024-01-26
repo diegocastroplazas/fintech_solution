@@ -1,13 +1,15 @@
 from rest_framework import serializers
 
-from .data import CUSTOMER_STATUS_CHOICES
+
 from .models import Customer
 
 
 class CustomerSerializer(serializers.ModelSerializer):
     """Customer serializer"""
 
-    status = serializers.ChoiceField(choices=CUSTOMER_STATUS_CHOICES, default=1)
+    status = serializers.ChoiceField(
+        choices=Customer.Status.choices, default=Customer.Status.ACTIVE
+    )
 
     class Meta:
         model = Customer
