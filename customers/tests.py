@@ -45,3 +45,11 @@ class CustomersViewTestCase(APITestCase):
             "2020-01-01T00:00:00.000000Z",
         )
         self.assertTrue(last_costumer.status == Customer.Status.ACTIVE)
+
+    def test_get_customer_balance(self):
+        customer = Customer.objects.get(external_id="1234567890")
+        url = reverse("customer-balance", kwargs={"pk": customer.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["total_debt"], 0)
+        self.assertEqual(response.data["available_amount"], customer.score)
