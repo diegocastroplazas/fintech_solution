@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 
 from .models import Loan
 
-from .serializers import LoanSerializer
+from .serializers import LoanCreateSerializer, LoanReadSerializer
 
 
 class LoansView(APIView):
@@ -17,12 +17,12 @@ class LoansView(APIView):
         costumer_external_id = request.query_params.get("costumer_external_id")
         if costumer_external_id:
             loans = loans.filter(customer__external_id=costumer_external_id)
-        serializer = LoanSerializer(loans, many=True)
+        serializer = LoanReadSerializer(loans, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
-        serializer = LoanSerializer(data=request.data)
+        serializer = LoanCreateSerializer(data=request.data)
         if serializer.is_valid():
-            loan = serializer.save()
-            return Response(LoanSerializer(loan).data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
