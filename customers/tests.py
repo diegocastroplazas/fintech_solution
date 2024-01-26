@@ -44,3 +44,4 @@ class CustomersViewTestCase(APITestCase):
             last_costumer.pre_approved_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
             "2020-01-01T00:00:00.000000Z",
         )
+        self.assertTrue(last_costumer.status == Customer.Status.ACTIVE)
