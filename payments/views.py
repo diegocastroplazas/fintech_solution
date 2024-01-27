@@ -11,10 +11,13 @@ from .serializers import (
     PaymentDetailSerializer,
     PaymentReadSerializer,
 )
+from rest_framework.permissions import IsAuthenticated
 
 
 class PaymentsView(APIView):
     """Payments view"""
+
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         payments = Payment.objects.all()

@@ -2,6 +2,7 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Customer
 from .serializers import CustomerBalanceSerializer, CustomerSerializer
@@ -11,6 +12,8 @@ class CustomersView(APIView):
     """
     List all customer, or create a new customer.
     """
+
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         customers = Customer.objects.all()
@@ -29,6 +32,8 @@ class CustomerBalanceView(APIView):
     """
     Retrieve a customer balance.
     """
+
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
