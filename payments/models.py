@@ -18,6 +18,10 @@ class Payment(models.Model):
     paid_at = models.DateTimeField(blank=True, null=True)
     customer = models.ForeignKey("customers.Customer", on_delete=models.PROTECT)
 
+    @property
+    def costumer_external_id(self):
+        return self.customer.external_id
+
     def __str__(self):
         return f"Payment: {self.id} - {self.external_id}"
 
