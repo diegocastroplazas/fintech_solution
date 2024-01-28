@@ -3,12 +3,13 @@ from django.urls import reverse
 from rest_framework import status
 from .models import Payment
 from customers.models import Customer
-from .serializers import PaymentReadSerializer, PaymentCreateSerializer
+from .serializers import PaymentReadSerializer
 from datetime import datetime
 from loans.models import Loan
+from fintech_solution.test import BaseTestCase
 
 
-class PaymentsViewTestCase(TestCase):
+class PaymentsViewTestCase(BaseTestCase):
     @classmethod
     def setUpTestData(cls):
         cls.customer = Customer.objects.create(
@@ -32,7 +33,7 @@ class PaymentsViewTestCase(TestCase):
         )
 
     def setUp(self):
-        self.client = Client()
+        super().setUp()
         self.url = reverse("payments")
 
     def test_get_all_payments(self):

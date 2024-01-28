@@ -1,4 +1,4 @@
-from rest_framework.test import APITestCase
+from fintech_solution.test import BaseTestCase
 from customers.models import Customer
 from django.urls import reverse
 from rest_framework import status
@@ -6,8 +6,9 @@ from decimal import Decimal
 from datetime import datetime
 
 
-class CustomersViewTestCase(APITestCase):
+class CustomersViewTestCase(BaseTestCase):
     def setUp(self):
+        super().setUp()
         Customer.objects.create(
             external_id="1234567890",
             score=Decimal("500.00"),
