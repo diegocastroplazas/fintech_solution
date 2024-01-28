@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "loans.apps.LoansConfig",
     "customers.apps.CustomersConfig",
     "payments.apps.PaymentsConfig",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -135,4 +136,11 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Fintech API Documentation",
+    "DESCRIPTION": "A great API for Fintech Solutions",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
