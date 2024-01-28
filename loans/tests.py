@@ -1,15 +1,15 @@
-from django.test import TestCase, Client
 from django.urls import reverse
 from rest_framework import status
 from .models import Loan
 from customers.models import Customer
 from .serializers import LoanReadSerializer
 from datetime import datetime
+from fintech_solution.test import BaseTestCase
 
 
-class LoansViewTestCase(TestCase):
+class LoansViewTestCase(BaseTestCase):
     def setUp(self):
-        self.client = Client()
+        super().setUp()
         self.customer = Customer.objects.create(
             external_id="1234567890",
             score=500.00,
